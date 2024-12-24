@@ -23,6 +23,6 @@ export const styles = StyleSheet.create({
   }, 
   logo: {
     height: 32, 
-    width: 32
+    width: 38
   }
 })
