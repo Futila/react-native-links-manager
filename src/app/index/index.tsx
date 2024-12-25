@@ -6,6 +6,7 @@ import { colors } from "@/styles/colors"
 import { Category } from "@/components/category"
 import { categorires } from "@/utils/categories"
 import { Categories } from "@/components/categories"
+import { Link } from "@/components/link"
 
 export default function Index() {
   return (
@@ -21,11 +22,14 @@ export default function Index() {
         </TouchableOpacity>
       </View>
 
-      {/* <Category name={categorires[0].name} icon={categorires[0].icon} isSelected/>
-      <Category name="Site" icon="language" isSelected={false}/>
-      <Category name="Vídeo" icon="movie" isSelected={false}/> */}
-
       <Categories/>
+
+      <Link 
+        name="Rocketseat" 
+        url="https://www.rocketseat.com.br/"
+        onDetails={() => console.log("Clicou")}
+      
+      />
 
     </View>
   )
