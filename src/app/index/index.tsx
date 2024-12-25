@@ -6,6 +6,7 @@ import { colors } from "@/styles/colors"
 import { Categories } from "@/components/categories"
 import { Link } from "@/components/link"
 import { FlatList } from "react-native"
+import { router } from "expo-router"
 
 export default function Index() {
   return (
@@ -16,7 +17,7 @@ export default function Index() {
           style={styles.logo}
         />
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.navigate("/add")}>
           <MaterialIcons name="add" size={32} color={colors.green[300]}/>
         </TouchableOpacity>
       </View>
