@@ -3,10 +3,9 @@ import {Image, Text, TouchableOpacity, View} from "react-native"
 import { styles } from "./styles"
 import { MaterialIcons } from "@expo/vector-icons"
 import { colors } from "@/styles/colors"
-import { Category } from "@/components/category"
-import { categorires } from "@/utils/categories"
 import { Categories } from "@/components/categories"
 import { Link } from "@/components/link"
+import { FlatList } from "react-native"
 
 export default function Index() {
   return (
@@ -24,11 +23,19 @@ export default function Index() {
 
       <Categories/>
 
-      <Link 
-        name="Rocketseat" 
-        url="https://www.rocketseat.com.br/"
-        onDetails={() => console.log("Clicou")}
-      
+      <FlatList
+        data={["1", "2", "3"]}
+        keyExtractor={item => item}
+        renderItem={({item}) => (
+          <Link 
+          name="Rocketseat" 
+          url="https://www.rocketseat.com.br/"
+          onDetails={() => console.log("Clicou")}
+          />
+        )}
+        style={styles.links}
+        contentContainerStyle={styles.linksContent}
+        showsVerticalScrollIndicator={false}
       />
 
     </View>
