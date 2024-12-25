@@ -8,7 +8,7 @@ export default function Layout () {
   return (
     <Stack
       screenOptions={{
-        //headerShown: false, 
+        headerShown: false, 
         contentStyle: {backgroundColor}
       }}
     
