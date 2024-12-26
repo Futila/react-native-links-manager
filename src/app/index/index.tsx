@@ -1,4 +1,4 @@
-import {Alert, Image, Modal, Text, TouchableOpacity, View} from "react-native"
+import {Alert, Image, Linking, Modal, Text, TouchableOpacity, View} from "react-native"
 
 import { styles } from "./styles"
 import { MaterialIcons } from "@expo/vector-icons"
@@ -61,6 +61,16 @@ export default function Index() {
     ])
   }
 
+  async function handleOpen() {
+    try {
+      await Linking.openURL(link.url)
+      setShowModal(false)
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível abrir o link")
+      console.log(error)
+    }
+  }
+
   useFocusEffect(
     useCallback(() => {
       getlinks()
@@ -101,7 +111,7 @@ export default function Index() {
         <View style={styles.modal}>
           <View style={styles.modalContent}>
             <View style={styles.modalHeader}>
-              <Text style={styles.modalCategory}>Curso</Text>
+              <Text style={styles.modalCategory}>{link.category}</Text>
               <TouchableOpacity onPress={() => setShowModal(false)}>
               <MaterialIcons name="close" size={20} color={colors.gray[400]} />
               </TouchableOpacity>
@@ -115,7 +125,7 @@ export default function Index() {
             <View style={styles.modalFooter}>
               
               <Option name="Excluir" icon="delete" variant="secondary" onPress={handleRemove} />
-              <Option name="Abrir" icon="language" />
+              <Option name="Abrir" icon="language" onPress={handleOpen}/>
             </View>
           </View>
         </View>
