@@ -3,9 +3,15 @@ import {Alert, Image, Modal, Text, TouchableOpacity, View} from "react-native"
 import { styles } from "./styles"
 import { MaterialIcons } from "@expo/vector-icons"
 import { colors } from "@/styles/colors"
+
+
 import { Categories } from "@/components/categories"
 import { Link } from "@/components/link"
+import { Option } from "@/components/option"
+
+
 import { FlatList } from "react-native"
+
 import { router, useFocusEffect } from "expo-router"
 import { useCallback, useEffect, useState } from "react"
 import { categorires } from "@/utils/categories"
@@ -35,6 +41,24 @@ export default function Index() {
   function handleDetails(selected: LinkStorage) {
     setShowModal(true)
     setlink(selected)
+  }
+
+  async function linkRemove() {
+    try {
+      await linkStorage.remove(link.id)
+      getlinks()
+      setShowModal(false)
+    } catch (error) {
+      Alert.alert("Erro", "Não foi possível excluir")
+      console.log(error);    
+    }
+  }
+
+  async function handleRemove() {
+    Alert.alert("Excluir", "Deseja realmente excluir?", [
+      { style: "cancel", text: "Não" },
+      { text: "Sim", onPress: linkRemove },
+    ])
   }
 
   useFocusEffect(
@@ -88,6 +112,11 @@ export default function Index() {
 
 
             <Text style={styles.modalUrl}>{link.url}</Text>
+            <View style={styles.modalFooter}>
+              
+              <Option name="Excluir" icon="delete" variant="secondary" onPress={handleRemove} />
+              <Option name="Abrir" icon="language" />
+            </View>
           </View>
         </View>
       </Modal>
