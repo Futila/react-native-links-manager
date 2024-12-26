@@ -6,8 +6,8 @@ import { colors } from "@/styles/colors"
 import { Categories } from "@/components/categories"
 import { Link } from "@/components/link"
 import { FlatList } from "react-native"
-import { router } from "expo-router"
-import { useEffect, useState } from "react"
+import { router, useFocusEffect } from "expo-router"
+import { useCallback, useEffect, useState } from "react"
 import { categorires } from "@/utils/categories"
 import { linkStorage, LinkStorage } from "@/storage/link-storage"
 
@@ -16,7 +16,7 @@ export default function Index() {
   const [category, setCategory] = useState(categorires[0].name)
   
 
-  async function fetchlinks() {
+  async function getlinks() {
     try {
       const response = await linkStorage.get();
       setLinks(response)
@@ -28,10 +28,11 @@ export default function Index() {
     }
   }
 
-  useEffect(()=> {
-    fetchlinks()
-
-  }, [category])
+  useFocusEffect(
+    useCallback(() => {
+      getlinks()
+    }, [])
+  )
   
   return (
     <View style={styles.container}>
